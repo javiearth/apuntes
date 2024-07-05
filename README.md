@@ -1,4 +1,4 @@
-*ESPAÑOL
+_ESPAÑOL
 ### Apuntes de Programación
 
 ¡Bienvenido a mi repositorio de apuntes de programación! Aquí encontrarás mis notas personales tomadas durante mi proceso de aprendizaje. Mi objetivo es formarme en diversas tecnologías y herramientas esenciales para el desarrollo de software. Entre los temas que cubriré se encuentran:
@@ -18,7 +18,7 @@ Logicamente no tengo tiempo para todo, por lo que me centrare principalmente en 
 
 He decidido compartir estos apuntes con la comunidad con la esperanza de que puedan ser de utilidad para otros. No dudes en aportar cualquier corrección, sugerencia o idea que tengas. ¡Toda contribución es bienvenida!
 
-*ENGLISH
+_ENGLISH
 ### Programming Notes
 
 Welcome to my programming notes repository! Here you will find my personal notes taken during my learning process. My goal is to gain knowledge in various essential technologies and tools for software development. The topics I will cover include:
