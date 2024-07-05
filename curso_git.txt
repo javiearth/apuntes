@@ -1,0 +1,290 @@
+==================
+INTRODUCCIÓN A GIT
+==================
+
+HEAD: donde estoy trabajando
+
+FUENTES
+Curso de Github: https://mouredev.com/git
+Retos de programacion: https://retosdeprogramcion.com
+Página oficial de git: https://git-scm.com
+
+¿Qué es Git? Es un sistema distribuido de control de versiones de código abierto. Github es una plataforma donde se aloja código y que utiliza Git.
+
+Git fue inventado por Linus Torvalds mientras creaba Linux. 
+
+INSTALACION DE GIT
+
+Los sistemas Unix (Linux y Mac) suelen traerlo instalado. Aun así, para instalarlo en distribuciones basadas en Debian utilizar sudo apt install git. Git puede usarse en consola (recomendable por facilidad de uso) o mediante interfaces gráficas, usa el que te resulte más cómodo. Originalmente se creó para usarse en terminal.
+
+PRIMEROS PASOS EN GIT
+
+Aquí usaré la terminal bash. Algunos comandos que hay que saber antes de empezar con git son: pwd, ls, cd, mkdir, touch
+
+Para usar Git necesitamos un nombre de usuario y un e-mail. 
+
+CONFIGURACIÓN DE GIT
+
+Para acceder a la configuración de git escribimos el comando git config y a continuación el nivel de configuración al que queremos afectar, seguido de lo que queremos modificar. Ejemplo:
+
+git config --global user.name "JaviEarth"
+
+git config --global user.email "javiearth@pm.me"
+
+GIT INIT
+
+Para empezar a realizar un control de versiones sólo tenemos que ir al directorio donde queremos realizarlo y escribir el comando git init. Ya hemos creado el repositorio. Aparecerá una carpeta oculta con el nombre .git. No tenemos que saber nada de esta carpeta para seguir usando git. En la consola nos aparecerá algo llamado master ( nos dirá que estamos en nuestrodirectorio/master. Este master hace referencia a la rama. (Podemos renombrar la rama con, por ejemplo: git branch -m main)
+
+GIT STATUS, ADD Y COMMIT
+
+git status
+  Nos  dice el estado del repositorio, si hay ficheros "untracked", es decir, si hay ficheros de los que no se están guardando versiones. También si hay commits.
+  
+git add
+  Para añadir ficheros al repositorio hacemos git add fichero
+  
+  
+git commit
+  Para guardar una version del proyecto. Necesitamos añadir un comentario (commit)
+  
+git commit -m "comentario"
+  Para guardar una version añadiendo directamente un comentario.
+  
+GIT LOG
+
+git log
+  nos devuelve una lista con los commits, mostrando el hash, el comentario, la fecha, hora y quien lo hizo.
+  
+git status
+  Además también nos dice si hay ficheros que se han modificado y que no han sido guardados desde el ultimo commit.
+  
+GIT CHECKOUT Y RESET
+
+git checkout
+  Es para situarnos en una version anterior de un fichero. Ejemplo: git checkout fichero
+  
+git reset
+  Nos dirá como estaba nuestro repositorio en la ultima version a la que le hicimos commit y si queremos podemos revertir los cambios.
+  
+GIT LOG
+
+git log --graph
+  Nos muestra por terminal las versiones como si fueran ramas.
+  
+git log --graph --pretty=oneline
+  Nos muestra un listado de commits en una línea.
+  
+git log --graph --decorate --all --oneline
+
+GIT ALIAS
+
+git config --global alias.nombre "comandos"
+  Para no tener que acordarnos de los comandos podemos usar alias y así no tener que escribirlo siempre. Es un alias para no escribir un comando.
+  
+GITIGNORE
+
+Si nunca vamos a querer guardar versiones de un archivo, para que no nos recuerde siempre que tenemos un archivo sin añadir al repositorio, creamos un archivo llamado .gitignore en el directorio. En este archivo .gitignore añadimos una lista de los archivos que no queremos guardar en el repositorio. Al hacer esto tendremos que añadir el archivo .gitignore al repositorio y un nuevo commit.
+
+GIT DIFF
+
+git diff
+  Nos dice los cambios que hemos realizado y en que ficheros.
+  
+DESPLAZAMIENTO
+
+Podemos volver a un estado inicial o previo con checkout.
+
+git checkout HEAD
+  La versión actual del proyecto es la cabeza actual, donde estamos trabajando. Sirve para verificar la cabeza de nuestro proyecto.
+  
+GIT RESET HARD Y REFLOG
+
+git reset --hard HASHNUMBER
+  Éste nos pone la cabeza en el hash indicado. No nos saldrán todos los commits, nos lo ignorará a partir de la versión a la que hemos vuelto. 
+  
+git reflog
+  nos muestra todos los commits, aunque hayamos hecho un hard reset. Podemos hacer otro hard reset al estado precio porque en reflog tenemos todos los commits.
+  
+GIT TAG
+
+Utilizamos tags para decir que una version es importante. 
+
+git tag NOMBRETAG
+  Etiquetamos donde estamos trabajando.
+  
+git add .
+  Para añadir al repositorio todos los ficheros pendientes.
+  
+git checkout tags/NOMBRETAG
+  Las etiquetas también nos sirven para los comandos.
+  
+GIT BRANCH Y SWITCH
+
+git branch NOMBRERAMA
+  Crea una nueva rama
+  
+git switch NOMBRERAMA
+  Nos cambiamos a trabajar a la rama.
+  
+Al crear una rama hacemos un commit (en el head). Ése commit es el mismo en una rama y otra, está "duplicado". A partir de ése commit se desarrollarán de forma independiente las dos ramas, cada una con sus commits.
+
+GIT MERGE
+Si tenemos dos ramas, una principal y otra de una feature y queremos importar los datos que se van desarrollando en la main a la feature, hacemos un merge. 
+Esta acción de merge se visualiza también en el login de git.
+
+Si por alguna razon hay conflicto (ejemplo, ambos equipos han tocado el mismo archivo), git nos dará una advertencia.
+
+Una vez solucionemos el conflicto, para decirle a git que ya esta resuelto añadimos de nuevo el fichero que estaba en conflicto y luego hacemos commit.
+
+GIT STASH
+git stash
+
+Antes de cambiar de rama, si no he hecho commit, git me dará un warning. Para eso, hacemos un stash es lugar de un commit. Esto es como un guardado rápido, un commit temporal que no genera un nuevo commit y que solo se guarda en local. De esta manera podemos resolver problemas en una branch mientras estábamos desarrollando en otra, solucionar lo que haya pasado, y volver a trabajar por donde lo dejamos.
+
+Para recuperar el stash:
+git stash posh
+
+Podemos eliminar el stash con:
+git stash drop
+
+Para ver la lista de los stash guardados hacemos:
+git stash list
+
+REINTEGRACION EN GIT
+
+Una vez hemos desarrollado la feature, habrá que incorporarla a la rama principal. Para ello podemos hacer un merge de la rama feature en la rama main, pero esta no es la forma adecuada de hacerlo.
+
+ELIMINACION DE RAMAS
+git branch -d NOMBRERAMA
+git branch --delete NOMBRERAMA
+
+Una vez hemos desarrollado la feature y la hemos mergeado en la rama main, la rama feature no es necesaria nunca mas y podemos eliminarla.
+
+Cuando hagamos git log no saldrá, no estará en el flujo de nuestro proyecto, aunque aun habrá referencias a ella en el árbol.
+
+
+=====================
+INTRODUCCION A GITHUB
+=====================
+
+Con Git se trabaja de forma local. Github es una plataforma en la nube que usa Git. Es lo mismo que Git pero en la nube.
+
+Tenemos la forma de mostrar algo con el repositorio del mismo nombre del usuario. En ese repositorio, el archivo README.MD se mostrará. Podemos añadir algo de formato con ciertos comandos como ### que sirve para poner un título. Esto se llama markdown, pero también podemos usar HTML.
+
+LOCAL Y REMOTO
+
+Lo primero es configurar que de alguna manera podamos interaccionar con Github.
+
+AUTENTICACION SSH
+
+Primero hay que comprobar si tengo clave SHH creada (/.ssh)
+
+Para eso seguir la documentación de Github en: https://docs.github.com/es/authentication/
+
+GIT REMOTE
+
+git remote add origin git@github.com:USUARIO/REPOSITORIO
+
+git push -u origin main
+Para subir repositorio
+ 
+ 
+Si añado cosas en github luego voy a necesitar hacer pull antes de hacer push porque habra conflicto.
+ 
+Hay que reconciliar las ramas de alguna manera, se puede configurar por defeto. Por defecto queremos hacer un merge
+
+La primera vez tendremos que establecer el mecanismo por defecto para reconciliar mi github con git en local.
+
+
+GIT CLONE
+
+Nos incorporamos a trabajar a un equipo. No tenemos nada en local. 
+
+Vamos a necesitar un ssh. Podemos hacer lo siguiente:
+
+1. Creamos una carpeta para ese proyecto, donde vamos a trabajar. También podemos descargar el proyecto entero, (ése repositorio), y trabajar en local. Para ello:
+git clone URL
+Ejecutamos ese código desde el directorio donde queremos descargar el repositorio de GitHub
+
+FORK
+
+Si no tenemos permisos para trabajar en el repositorio, podemos indicar al dueno del proyecto que queremos hacer cambios. Para ello le damos al botón Fork en Github, así hacemos una copia de ese repositorio en el nuestro.
+
+Ahora es cuando realmente podemos hacer el git clone de ese repositorio que es nuestro. 
+
+FLUJO COLABORATIVO
+
+Hacemos los cambios en nuestro repositorio local, lo pusheamos a nuestro repositorio. Ahora podemos solicitar al dueño del código original que incluya nuestros cambios. Para ello le damos a sync fork, es una especie de merge entre repositorios de usuarios distintos. Lo siguiente es hacer un...
+
+PULL REQUEST (PR)
+
+Al hacer sync tenemos un commit creado por delante del proyecto original, nos pregunta que si queremos hacer pull request. Aceptamos, salen los cambios y a quién le queremos hacer pull request, le añadimos un comentario, enviamos y por nuestra parte es todo.
+
+Ahora, al dueño del repositorio original le aparecerá un pull request con nuestro nombre de usuario y el comentario. El dueño ve los cambios y decide si aprobar o no el commit dejando un comentario.
+
+Tras aceptarlo, para reflejar estos cambios, el dueño tiene que hacer un merge pull request. Ya esta hecho.
+
+HASTA AQUI LOS CONOCIMIENTOS BASICOS PARA TRABAJAR COLABORATIBAMENTE CON GIT Y GITHUB !!!
+
+El resto es flujo de trabajo muy sencillito en GitHub.
+
+Los archivos .md de github son archivos markdown, que tiene algunos comandos muy básicos y rápidos para dar formato al texto. El README.md se muestra por defecto en la pagina principal de Github del repositorio.
+El propio formato markdown también acepta html si queremos hacerlo mas complejo.
+
+GIT FLOW
+
+apt install git flow
+
+Para empezar a trabajar con git flow en nuestro proyecto:
+git flow init
+
+Damos nombres  las ramas, pero se dejan por defecto
+
+main: solo para releases. Es donde se van guardando las cosas importantes
+develop: la que está en desarrollo y se va publicando
+feature: distintas características que se desarrollan paralelamente a develop
+hotfix: se repara un error de forma paralela a la main y se implementa en la rama main y develop
+Release: cuando se cambia la version, un cambio importan, se trabaja paralelamente a develop y se despliega en main y develop.
+Support:
+
+Git nos coloca de manera automática en la rama develop.
+
+Para crear una feature en una nueva rama haríamos:
+
+git flow feature start 2auth
+
+Cuando terminemos de implementar la feature hacemos finish, esta incluye automáticamente el cierre de la rama y mergear la feature en la rama develop.
+
+GIT CHERRY-PICK Y REBASE
+
+Cherry pick es traer un commit de una rama a otra. Por ejemplo en el caso de una feature que se abandona pero en la que desarrollamos algo que ahora nos es util. 
+
+git cherry-pick NUMERO COMMIT.
+
+
+El comando rebase es para traer una rama a un punto concreto.
+
+GITHUB PAGES
+
+Podemos utilizar nuestro repositorio de Github como hosting para nuestra pagina web. Para ello creamos un repositorio del tipo:
+
+usuario.github.io
+
+El lenguaje usado es Markdown. Esta es su sintaxis básica:
+
+- Encabezados: con #, varios seguidos para indicar el nivel (###)
+- Énfasis: * y _
+- Enlaces: [(URL)]
+- Imágenes: [(URL)]
+- Citas: >micita
+- Código: ' y '''
+- Tablas: separamos las columnas por |
+
+Github actions es automatización de varias tareas en Github.
+
+HERRAMIENTAS GRÁFICAS:
+
+- Gitkraken
+- SourceTree
+- Fork (pago)
+
